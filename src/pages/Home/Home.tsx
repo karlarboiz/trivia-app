@@ -15,10 +15,10 @@ export default function Home(){
 
         <div className={styles.buttons}>
           <Link to="/start-quiz" className={styles.primaryBtn}>
-            <Button title="Start Quiz"/>
+            <Button title="Start Quiz" type="primaryBtn"/>
           </Link>
           <Link to="/about" className={styles.secondaryBtn}>
-            Learn More
+            <Button title="About" type="secondaryBtn"/>
           </Link>
         </div>
       </section>
