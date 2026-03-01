@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
+import CustomLink from "../../components/Link/CustomLink";
 import styles from "./Home.module.css";
-
 export default function Home(){
 
     return (
@@ -17,9 +17,7 @@ export default function Home(){
           <Link to="/start-quiz" className={styles.primaryBtn}>
             <Button title="Start Quiz" type="primaryBtn"/>
           </Link>
-          <Link to="/about" className={styles.secondaryBtn}>
-            <Button title="About" type="secondaryBtn"/>
-          </Link>
+          <CustomLink href="/about">About</CustomLink>
         </div>
       </section>
 

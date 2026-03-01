@@ -1,0 +1,29 @@
+.link-modern {
+  position: relative;
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 18px;
+}
+
+.link-modern::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+.link-modern:hover {
+  color: #3498db;
+}
+
+.link-modern:hover::after {
+  width: 100%;
+}
+
+

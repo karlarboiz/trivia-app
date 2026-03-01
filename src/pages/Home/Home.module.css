@@ -1,3 +1,7 @@
+:root {
+  --common-link-size: 18px;
+}
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -26,6 +30,7 @@
 .buttons {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 15px;
   flex-wrap: wrap;
 }
@@ -46,7 +51,7 @@
 
 .secondaryBtn {
   border: 2px solid white;
-  color: white;
+  font-size: var(--common-link-size);
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
