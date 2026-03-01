@@ -1,0 +1,75 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 50px 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  font-size: 2rem;
+  color: #ef4444;
+  margin-bottom: 15px;
+}
+
+.message {
+  color: #444;
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.primaryBtn:hover {
+  background-color: #4338ca;
+}
+
+.secondaryBtn {
+  border: 2px solid #4f46e5;
+  color: #4f46e5;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.secondaryBtn:hover {
+  background-color: #eef2ff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .card {
+    padding: 35px 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+}
