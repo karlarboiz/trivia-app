@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./StartQuiz.module.css";
-const url : string = "https://the-trivia-api.com/api/questions?limit=1&categories=history&difficulty=medium";
+// const url : string = "https://the-trivia-api.com/api/questions?limit=1&categories=history&difficulty=medium";
 
 type Difficulty = "easy" | "medium" | "hard";
 
