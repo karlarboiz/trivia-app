@@ -2,6 +2,8 @@ import type { QuizSettingsProps } from "./quiz-model";
 import styles from "./QuizSettings.module.css";
 
 export default function QuizSettings({totalItems,topics,difficulty, timer}:QuizSettingsProps){
+
+    
     return <section className={styles.settingsContainer}>
       <div className={styles.setting}>
         <span className={styles.label}>Items</span>
