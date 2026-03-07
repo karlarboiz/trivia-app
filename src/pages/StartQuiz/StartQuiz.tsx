@@ -32,7 +32,7 @@ export default function StartQuiz () {
 
   return (
     <>
-      <QuizSettings/>
+      <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer}/>
       <div className={styles.container}>
       <h1 className={styles.title}>🎯 Welcome to the Trivia Challenge!</h1>
       <p className={styles.subtitle}>
