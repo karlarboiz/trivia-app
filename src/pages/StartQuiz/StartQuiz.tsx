@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styles from "./StartQuiz.module.css";
+
 // const url : string = "https://the-trivia-api.com/api/questions?limit=1&topics=history&difficulty=medium";
+import { useNavigate } from "react-router-dom";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
 type Difficulty = "easy" | "medium" | "hard";
 type Timer = 5 | 10 | 15;
+const totalItemsArr = [5,10,15,20];
 const categoryTopics = [
   "General Knowledge",
   "Science",
@@ -13,19 +16,28 @@ const categoryTopics = [
 ];
 
 export default function StartQuiz () {
+  const navigate = useNavigate();
   const [totalItems, setTotalITems] = useState<number>(10);
   const [topics, setTopics] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [timer, setTimer] = useState<Timer>(5);
-
-  const handleSubmit = (e: React.FormEvent) => {
+ 
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
+    const baseUrl = "https://the-trivia-api.com/api/questions?limit=";
+    const topicPart = "&topics=";
+    const difficultyPart = "&difficulty=";
 
-    // onStart({
-    //   amount,
-    //   category,
-    //   difficulty,
-    // });
+    const fixTopics = topics.map(topic=>topic.toLowerCase().replace(" ","_")).join(",");
+    try{
+      const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty);
+      const result = (await fetchQuizResults).json();
+      console.log(await result);
+      navigate("/quiz-page/multiple-choice")
+    }catch(error){
+
+    }
+
   };
 
   // const 
@@ -47,7 +59,7 @@ export default function StartQuiz () {
             value={totalItems}
             onChange={(e) => setTotalITems(Number(e.target.value))}
           >
-            {[5, 10, 15, 20].map((num) => (
+            {totalItemsArr.map((num) => (
               <option key={num} value={num}>
                 {num}
               </option>
