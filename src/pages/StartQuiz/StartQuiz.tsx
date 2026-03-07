@@ -4,7 +4,7 @@ import styles from "./StartQuiz.module.css";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
 type Difficulty = "easy" | "medium" | "hard";
 type Timer = 5 | 10 | 15;
-const topics = [
+const categoryTopics = [
   "General Knowledge",
   "Science",
   "History",
@@ -58,7 +58,7 @@ export default function StartQuiz () {
             <label>Topics</label>
 
             <div className={styles.checkboxGroup}>
-                {topics.map((cat) => (
+                {categoryTopics.map((cat) => (
                 <label key={cat} className={styles.checkboxLabel}>
                     <input
                     type="checkbox"
