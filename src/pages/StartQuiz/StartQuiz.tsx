@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from "./StartQuiz.module.css";
-
-// const url : string = "https://the-trivia-api.com/api/questions?limit=1&topics=history&difficulty=medium";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
+import { type RootState } from "../../redux/store-config";
+import styles from "./StartQuiz.module.css";
 type Difficulty = "easy" | "medium" | "hard";
 type Timer = 5 | 10 | 15;
 const totalItemsArr = [5,10,15,20];
@@ -17,7 +17,8 @@ const categoryTopics = [
 
 export default function StartQuiz () {
   const navigate = useNavigate();
-  console.log(import.meta.env);
+  const values = useSelector((state: RootState) => state.collectQuestionsSlice.value);
+  console.log(values);
   const [totalItems, setTotalITems] = useState<number>(10);
   const [topics, setTopics] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");

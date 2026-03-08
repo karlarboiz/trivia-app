@@ -6,9 +6,9 @@ import { store } from './redux/store-config';
 import { router as routerConfig } from './routes/Routes';
 
 const router = createBrowserRouter(routerConfig); 
-
+ 
 createRoot(document.getElementById('root')!).render(
-  < Provider store={store}>
+  < Provider store={store}> 
     <RouterProvider router={router}  />
   </Provider>,
 )
