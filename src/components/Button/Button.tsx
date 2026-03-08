@@ -1,6 +1,6 @@
 import type { ButtonProps } from "./button-model";
 import styles from "./Button.module.css";
-export default function Button({title,type}: ButtonProps){
+export default function Button({title,type, onClick : onClickAction}: ButtonProps){
 
   const primaryBtn = <button className={styles["cta"]}>
               <span>{title}</span>
@@ -10,8 +10,7 @@ export default function Button({title,type}: ButtonProps){
               </svg>
             </button>;
 
-  const secondaryBtn = <button className={styles[type]}>{title}</button>;
-
+  const secondaryBtn = <button onClick={onClickAction} className={styles[type]}>{title}</button>;
 
   switch(type) {
     case "primaryBtn":
