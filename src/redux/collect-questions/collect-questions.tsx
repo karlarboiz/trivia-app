@@ -7,7 +7,7 @@ const collectQuestionsSlice = createSlice({
   },
   reducers: {
     collect: state => {
-        state.value = state.value;
+        console.log(state);
     }
     
   }

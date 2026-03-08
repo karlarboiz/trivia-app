@@ -1,30 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
-import { useAppSelector } from "../../redux/hook";
+import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
+import { useAppDispatch } from "../../redux/hook";
+import CommonUtil from "../../Util/CommonUtil";
 import styles from "./StartQuiz.module.css";
-
 
 type Difficulty = "easy" | "medium" | "hard";
 type Timer = 5 | 10 | 15;
-const totalItemsArr = [5,10,15,20];
-const categoryTopics = [
-  "General Knowledge",
-  "Science",
-  "History",
-  "Sports",
-  "Entertainment",
-];
+type TotalItems = 5 | 10 | 15 |20;
+
+
 
 export default function StartQuiz () {
-  const navigate = useNavigate();
-  const values = useAppSelector(state=>state.collectQuestionsSlice.value);
-  console.log(values);
   const [totalItems, setTotalITems] = useState<number>(10);
   const [topics, setTopics] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [timer, setTimer] = useState<Timer>(5);
- 
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     const baseUrl = "https://the-trivia-api.com/api/questions?limit=";
@@ -35,7 +31,8 @@ export default function StartQuiz () {
     try{
       const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty);
       const result = (await fetchQuizResults).json();
-      console.log(await result);
+      const resultJson = await result;
+      dispatch(collectQuestionsActions.collect(resultJson));
       navigate("/quiz-page/multiple-choice")
     }catch(error){
 
@@ -60,9 +57,9 @@ export default function StartQuiz () {
           <select
             id="totalItems"
             value={totalItems}
-            onChange={(e) => setTotalITems(Number(e.target.value))}
+            onChange={(e) => setTotalITems(Number(e.target.value) as TotalItems)}
           >
-            {totalItemsArr.map((num) => (
+            {CommonUtil.TOTAL_ITEMS_ARR.map((num) => (
               <option key={num} value={num}>
                 {num}
               </option>
@@ -73,7 +70,7 @@ export default function StartQuiz () {
             <label>Topics</label>
 
             <div className={styles.checkboxGroup}>
-                {categoryTopics.map((cat) => (
+                {CommonUtil.CATEGORY_TOPICS.map((cat) => (
                 <label key={cat} className={styles.checkboxLabel}>
                     <input
                     type="checkbox"

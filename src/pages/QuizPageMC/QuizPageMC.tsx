@@ -7,13 +7,12 @@ import CommonUtil from "../../Util/CommonUtil";
 export default function QuizPageMC(){
     const dispatch = useAppDispatch();
     const itemNumber = useAppSelector(state => state.multipleChoiceSlice.value);
-    
+    const quizItems = useAppSelector(state => state.collectQuestionsSlice.value);
+    console.log(quizItems)
     function moveItem(){
         dispatch(multipleChoiceActions.incremented());
     }
 
-    console.log(itemNumber);
-    
     const totalItems =  2;
     const topics = ["hello"];
     const difficulty = "hard";
@@ -21,6 +20,6 @@ export default function QuizPageMC(){
     return <section>
        <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer} />
         <h1>The Quiz Page starts here</h1>
-        <Button title="Next" type={CommonUtil.SECONDARY_BTN}/>
+        <Button title="Next" type={CommonUtil.SECONDARY_BTN} onClick={moveItem}/>
     </section>
 }
