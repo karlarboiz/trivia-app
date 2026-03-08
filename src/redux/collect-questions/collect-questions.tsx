@@ -6,8 +6,15 @@ const collectQuestionsSlice = createSlice({
     value: []
   },
   reducers: {
-    collect: state => {
-        console.log(state);
+    collect: (state, action) => {
+       
+        const questions: [] = action.payload;
+        const updateQuestions = questions.map(({val})=>{
+            
+            return val;
+        })
+        
+        state.value = action.payload;
     }
     
   }

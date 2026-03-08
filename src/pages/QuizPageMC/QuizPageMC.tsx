@@ -8,7 +8,7 @@ export default function QuizPageMC(){
     const dispatch = useAppDispatch();
     const itemNumber = useAppSelector(state => state.multipleChoiceSlice.value);
     const quizItems = useAppSelector(state => state.collectQuestionsSlice.value);
-    console.log(quizItems)
+ 
     function moveItem(){
         dispatch(multipleChoiceActions.incremented());
     }

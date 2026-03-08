@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const multipleChoiceSlice = createSlice({
   name: 'multipleChoice',
   initialState: {
-    value: 0
+    value: 0,
+    completedItems: 0
   },
   reducers: {
     incremented: state => {
@@ -11,6 +12,9 @@ const multipleChoiceSlice = createSlice({
     },
     decremented: state => {
       state.value -= 1
+    },
+    completedItems: (state)=>{
+      state.completedItems -= 1
     }
   }
 })
