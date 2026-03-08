@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
-import { type RootState } from "../../redux/store-config";
+import { useAppSelector } from "../../redux/hook";
 import styles from "./StartQuiz.module.css";
+
+
 type Difficulty = "easy" | "medium" | "hard";
 type Timer = 5 | 10 | 15;
 const totalItemsArr = [5,10,15,20];
@@ -17,7 +18,7 @@ const categoryTopics = [
 
 export default function StartQuiz () {
   const navigate = useNavigate();
-  const values = useSelector((state: RootState) => state.collectQuestionsSlice.value);
+  const values = useAppSelector(state=>state.collectQuestionsSlice.value);
   console.log(values);
   const [totalItems, setTotalITems] = useState<number>(10);
   const [topics, setTopics] = useState<string[]>([]);
