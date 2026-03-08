@@ -17,6 +17,7 @@ const categoryTopics = [
 
 export default function StartQuiz () {
   const navigate = useNavigate();
+  console.log(import.meta.env);
   const [totalItems, setTotalITems] = useState<number>(10);
   const [topics, setTopics] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
