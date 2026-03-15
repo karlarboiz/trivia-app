@@ -28,9 +28,9 @@ export default function QuizSettings({totalItems,topics,difficulty, timer, isInG
         <span className={styles.value}>{difficulty}</span>
       </div>
 
-      <div className={styles.setting}>
+      {!isInGame && <div className={styles.setting}>
         <span className={styles.label}>Timer</span>
         <span className={styles.value}>{timer} sec</span>
-      </div>
+      </div>}
     </section>
 }

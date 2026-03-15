@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Button from "../../components/Button/Button";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
+import Timer from "../../components/Timer/Timer";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choice-redux";
 import CommonUtil from "../../Util/CommonUtil";
@@ -15,8 +16,8 @@ export default function QuizPageMC(){
     const quizItems = useAppSelector(state => state.collectQuestionsSlice.value);
     const isInGame = quizItems.length > 0;
     const currentItem : QuizItemsModel = quizItems[itemNumber];
-    const question : string = currentItem.question;
-    const options = [...currentItem.incorrectAnswers, currentItem.correctAnswer];
+    const question : string = currentItem?.question;
+    const options = [...currentItem?.incorrectAnswers, currentItem?.correctAnswer];
 
     const handleClick = (option: string) => {
         setSelected(option);
@@ -26,10 +27,15 @@ export default function QuizPageMC(){
         dispatch(multipleChoiceActions.incremented());
     }
 
+    const handleTimeUp = () => {
+    console.log("Time is up!");
+  };
+
     const topics = ["hello"];
     const difficulty = "hard";
     const timer = 5;
     return <section className={styles.quizContainer}>
+        <Timer duration={timer} onTimeUp={handleTimeUp}/>
          <QuizSettings totalItems={itemNumber} topics={topics} difficulty={difficulty} timer={timer} isInGame={isInGame} />
       <h2 className={styles.question}>{question}</h2>
 

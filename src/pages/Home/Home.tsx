@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import CustomLink from "../../components/Link/CustomLink";
 import styles from "./Home.module.css";
+
 export default function Home(){
 
     return (

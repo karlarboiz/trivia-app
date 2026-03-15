@@ -1,5 +1,5 @@
 export interface QuizItemsModel {
-    category: string,
+    category: string ,
     correctAnswer: string,
     difficulty: string,
     id: string,
