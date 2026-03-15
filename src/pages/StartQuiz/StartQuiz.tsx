@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
 import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import CommonUtil from "../../Util/CommonUtil";
 import styles from "./StartQuiz.module.css";
 
@@ -18,6 +18,8 @@ export default function StartQuiz () {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [timer, setTimer] = useState<Timer>(5);
 
+  const quizItems = useAppSelector(state => state.collectQuestionsSlice.value);
+  const isInGame = quizItems.length > 0;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   
@@ -44,7 +46,7 @@ export default function StartQuiz () {
 
   return (
     <>
-      <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer}/>
+      <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer} isInGame={isInGame}/>
       <div className={styles.container}>
       <h1 className={styles.title}>🎯 Welcome to the Trivia Challenge!</h1>
       <p className={styles.subtitle}>

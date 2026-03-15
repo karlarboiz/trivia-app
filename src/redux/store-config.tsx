@@ -2,10 +2,13 @@ import { configureStore } from "@reduxjs/toolkit"
 
 import collectQuestionsSlice from "./collect-questions/collect-questions"
 import multipleChoiceSlice from "./multiple-choice/multiple-choice-redux"
+import settingsCollectionSlice from "./settings-collection/settings-collection"
+settingsCollectionSlice
 export const store = configureStore({
     reducer: {
         multipleChoiceSlice: multipleChoiceSlice.reducer,
-        collectQuestionsSlice: collectQuestionsSlice.reducer
+        collectQuestionsSlice: collectQuestionsSlice.reducer,
+        settingsCollectionSlice: settingsCollectionSlice.reducer
     }
 })
 
