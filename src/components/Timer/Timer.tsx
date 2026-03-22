@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../redux/hook";
 import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choice-redux";
 import styles from "./Timer.module.css";
 multipleChoiceActions
@@ -11,20 +10,18 @@ interface TimerProps {
 export default function Timer({ duration, onTimeUp }: TimerProps) {
     
   const [timeLeft, setTimeLeft] = useState(duration * 1000);
-  const dispatch = useAppDispatch();
   useEffect(() => {
-    if (timeLeft <= 0) {
-      onTimeUp();
-      return;
-    }
+  if (timeLeft <= 0) {
+    onTimeUp(); // ✅ call once
+    return;
+  }
 
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => prev - 100);
-    }, 100);
-    dispatch(multipleChoiceActions.incremented());
+  const interval = setInterval(() => {
+    setTimeLeft(prev => prev - 100);
+  }, 100);
 
-    return () => clearInterval(interval);
-  }, [timeLeft, onTimeUp]);
+  return () => clearInterval(interval);
+}, [timeLeft]);
 
   const seconds = Math.floor(timeLeft / 1000);
   const milliseconds = Math.floor((timeLeft % 1000) / 10);

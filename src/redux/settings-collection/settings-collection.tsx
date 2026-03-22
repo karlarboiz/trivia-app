@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import type { QuizSettingsModel } from "./quizSettings-model";
 const settingsCollectionSlice = createSlice({
   name: 'settingCollection',
   initialState: {
@@ -9,7 +9,7 @@ const settingsCollectionSlice = createSlice({
     timer: 0
   },
   reducers: {
-    collectSettings: (state,action) => {
+    collectSettings: (state : QuizSettingsModel,action) => {
       state.items = action.payload.items;
       state.topics = action.payload.topics;
       state.difficulty=  action.payload.difficulty;

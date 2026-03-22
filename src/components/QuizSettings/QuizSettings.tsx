@@ -3,7 +3,7 @@ import type { QuizSettingsProps } from "./quiz-model";
 import styles from "./QuizSettings.module.css";
 
 export default function QuizSettings({totalItems,topics,difficulty, timer, isInGame}:QuizSettingsProps){
-    const quizItems = useAppSelector(state => state.collectQuestionsSlice.value)
+    const itemNumber = useAppSelector(state => state.multipleChoiceSlice.value);
     let itemNumberTab = <div className={styles.setting}>
         <span className={styles.label}>Items</span>
         <span className={styles.value}>{totalItems}</span>
@@ -12,7 +12,7 @@ export default function QuizSettings({totalItems,topics,difficulty, timer, isInG
     if(isInGame){
       itemNumberTab = <div className={styles.setting}>
         <span className={styles.label}>Item No:</span>
-        <span className={styles.value}>{totalItems} / {quizItems.length}</span>
+        <span className={styles.value}>{itemNumber + 1} / {totalItems}</span>
       </div>
     }
     return <section className={styles.settingsContainer}>

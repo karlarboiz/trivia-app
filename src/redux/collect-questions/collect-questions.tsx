@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { QuizItemsModel } from '../../pages/QuizPageMC/quizpageMC-model';
 
 const collectQuestionsSlice = createSlice({
   name: 'collectQuestions',
@@ -8,11 +9,13 @@ const collectQuestionsSlice = createSlice({
   reducers: {
     collect: (state, action) => {
        
-        const questions: [] = action.payload;
-        const updateQuestions = questions.map(({val})=>{
-            
-            return val;
+        const questions: QuizItemsModel[] = action.payload;
+        const updateQuestions = questions.map((val :QuizItemsModel)=>{
+          val.completeChoices = [...val.incorrectAnswers,val.correctAnswer].sort();
+          return val
         })
+
+        localStorage.setItem("quizItems",JSON.stringify(updateQuestions));
         
         state.value = action.payload;
     }
