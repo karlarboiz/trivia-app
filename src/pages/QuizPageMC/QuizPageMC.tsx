@@ -32,15 +32,13 @@ export default function QuizPageMC() {
 
   if (quizItems.length === 0) return <div>Loading quiz...</div>;
 
- 
-
   return (
     <section className={styles.quizContainer}>
-      {/* reset timer for each new question */}
-      <Timer key={itemNumber} duration={5} onTimeUp={moveItem} />
-
       {itemNumber < quizItems.length ? (
+        <>
+        <Timer key={itemNumber} duration={5} onTimeUp={moveItem} />
         <QuizItemsMC incrementValue={itemNumber} quizItems={quizItems} isInGame={isInGame}/>
+        </>
       ) : (
         <div>Quiz Finished! 🎉</div>
       )}

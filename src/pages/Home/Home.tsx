@@ -5,6 +5,10 @@ import styles from "./Home.module.css";
 
 export default function Home(){
 
+    if(localStorage.getItem("quizItems")){
+      localStorage.removeItem("quizItems");
+    }
+
     return (
         <div className={styles.container}>
       {/* HERO SECTION */}

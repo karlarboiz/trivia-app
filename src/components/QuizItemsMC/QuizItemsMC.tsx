@@ -6,15 +6,11 @@ import styles from "./QuizItemsMC.module.css";
 
 export default function QuizItemsMC({ incrementValue, quizItems, isInGame }: QuizItemsMCModel) {
   const [selected, setSelected] = useState<string | null>(null);
-    console.log(incrementValue)
-  // ✅ currentQuizItem is derived from props
   const currentQuizItem: QuizItemsModel | undefined = quizItems[incrementValue];
 
   const handleClick = (option: string) => {
     setSelected(option);
   };
-
-  // ✅ Guard for undefined
   if (!currentQuizItem) {
     return <div>Loading question...</div>;
   }
