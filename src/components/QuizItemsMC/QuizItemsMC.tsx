@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { QuizItemsModel } from "../../pages/QuizPageMC/quizpageMC-model";
+import { useAppDispatch } from "../../redux/hook";
+import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choice-redux";
 import QuizSettings from "../QuizSettings/QuizSettings";
 import type { QuizItemsMCModel } from "./quizitemsMC-model";
 import styles from "./QuizItemsMC.module.css";
@@ -7,9 +9,11 @@ import styles from "./QuizItemsMC.module.css";
 export default function QuizItemsMC({ incrementValue, quizItems, isInGame }: QuizItemsMCModel) {
   const [selected, setSelected] = useState<string | null>(null);
   const currentQuizItem: QuizItemsModel | undefined = quizItems[incrementValue];
+  const dispatch = useAppDispatch();
 
   const handleClick = (option: string) => {
     setSelected(option);
+    dispatch(multipleChoiceActions.checkAnswer({answer: option}));
   };
   if (!currentQuizItem) {
     return <div>Loading question...</div>;

@@ -5,5 +5,7 @@ export interface QuizItemsModel {
     id: string,
     incorrectAnswers: string[],
     question:string,
-    completeChoices: string[]
+    completeChoices: string[],
+    isAnswered: boolean,
+    isCorrectAnswer: boolean
 }
