@@ -1,19 +1,28 @@
+import bcrypt from "bcryptjs-react";
 import { useState } from "react";
 import type { QuizItemsModel } from "../../pages/QuizPageMC/quizpageMC-model";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choice-redux";
 import QuizSettings from "../QuizSettings/QuizSettings";
 import type { QuizItemsMCModel } from "./quizitemsMC-model";
 import styles from "./QuizItemsMC.module.css";
 
-export default function QuizItemsMC({ incrementValue, quizItems, isInGame }: QuizItemsMCModel) {
+export default function QuizItemsMC({ incrementValue, quizItems, isInGame,onClickedMonitoring }: QuizItemsMCModel) {
   const [selected, setSelected] = useState<string | null>(null);
   const currentQuizItem: QuizItemsModel | undefined = quizItems[incrementValue];
   const dispatch = useAppDispatch();
+  const currentItemNumber = useAppSelector(state=>state.multipleChoiceSlice.value);
+  
+  const handleClick = async(answer: string) => {
+    const quizItem = quizItems[currentItemNumber];
 
-  const handleClick = (option: string) => {
-    setSelected(option);
-    dispatch(multipleChoiceActions.checkAnswer({answer: option}));
+    const isCorrectAnswer = await bcrypt.compare(answer, quizItem.correctAnswer);
+    setSelected(answer);
+    dispatch(multipleChoiceActions.checkAnswer({answer,
+      isCorrectAnswer
+    }));
+    onClickedMonitoring();
+    
   };
   if (!currentQuizItem) {
     return <div>Loading question...</div>;

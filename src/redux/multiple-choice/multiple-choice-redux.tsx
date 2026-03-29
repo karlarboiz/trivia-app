@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import bcrypt from "bcryptjs-react";
 import type { QuizItemsModel } from '../../pages/QuizPageMC/quizpageMC-model';
 const multipleChoiceSlice = createSlice({
   name: 'multipleChoice',
@@ -25,15 +24,15 @@ const multipleChoiceSlice = createSlice({
       quizItem.isAnswered = action.payload.answer !== null || action.payload.answer !== undefined 
                             || action.payload.answer !== "";
       
-      if(quizItem.isAnswered){
-        bcrypt.compare(action.payload.answer, quizItem.correctAnswer)
-              .then(result => {
-                quizItem.isCorrectAnswer = result;
-              });
-      }
-
+      quizItem.playerAnswer = action.payload.answer;
+      quizItem.isCorrectAnswer = action.payload.isCorrectAnswer;
       quizItems[state.value] = quizItem;
       localStorage.setItem("quizItems",JSON.stringify(quizItems));
+    },
+    consumedTime: (state,action)=>{
+       const quizItems: QuizItemsModel[] =JSON.parse(localStorage.getItem("quizItems") || "[]"); 
+      const quizItem: QuizItemsModel = quizItems[state.value];
+      quizItem.timeConsumed = action.payload.timeLeft;
     }
   }
 })

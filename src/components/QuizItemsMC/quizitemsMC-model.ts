@@ -3,4 +3,5 @@ export type QuizItemsMCModel = {
   incrementValue: number;
   quizItems: QuizItemsModel[];
   isInGame: boolean;
+  onClickedMonitoring: ()=>void;
 };

@@ -26,8 +26,7 @@ const collectQuestionsSlice = createSlice({
         localStorage.setItem("quizItems",JSON.stringify(updateQuestions));
         
         state.value = action.payload;
-    },
-
+    }
     
   }
 })
