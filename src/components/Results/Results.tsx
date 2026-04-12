@@ -7,13 +7,12 @@ type ResultsProps = {
 };
 
 export default function Results() {
-  
-
 
     const results: QuizItemsModel[] = JSON.parse(
       localStorage.getItem("quizItems") || "[]"
     );
 
+  
     const correctCount = results.filter(item => item.isCorrectAnswer).length;
 
   return (
@@ -29,7 +28,7 @@ export default function Results() {
       <div className={styles.list}>
         {results.map((item, index) => (
           <div
-            key={index}
+            key={item.id}
             className={`${styles.card} ${
               item.isCorrectAnswer ? styles.correct : styles.wrong
             }`}
@@ -42,11 +41,6 @@ export default function Results() {
               Your Answer: <span>{item.playerAnswer}</span>
             </p>
 
-            {!item.isCorrectAnswer && (
-              <p className={styles.correctAnswer}>
-                Correct Answer: <span>{item.correctAnswer}</span>
-              </p>
-            )}
 
             <div className={styles.status}>
               {item.isCorrectAnswer ? "✅ Correct" : "❌ Wrong"}
