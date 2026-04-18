@@ -1,28 +1,64 @@
 .settingsContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f5f7fb;
-  border-radius: 10px;
-  padding: 12px 20px;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  background: #f9fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   flex-wrap: wrap;
-  gap: 15px;
+
+ 
 }
 
+/* Each card */
 .setting {
+  background: white;
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-width: 200px;
+
   display: flex;
   flex-direction: column;
-  font-size: 14px;
+  gap: 4px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: 0.2s ease;
 }
 
+.setting:hover {
+  transform: translateY(-2px);
+}
+
+/* Label */
 .label {
-  color: #777;
-  font-weight: 500;
+  font-size: 1.25rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
 }
 
+/* Value */
 .value {
-  font-size: 16px;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #222;
+  color: #111;
+}
+
+/* Optional: highlight important one */
+.setting:first-child {
+  background: #eff6ff;
+  border: 1px solid #3b82f6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .settingsContainer {
+    justify-content: center;
+  }
+
+  .setting {
+    flex: 1 1 45%;
+  }
 }
