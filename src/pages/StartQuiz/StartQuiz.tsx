@@ -31,13 +31,14 @@ export default function StartQuiz () {
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     const baseUrl = "https://the-trivia-api.com/api/questions?limit=";
-    const topicPart = "&topics=";
-    const difficultyPart = "&difficulty=";
+    const topicPart = "&categories=";
+    const difficultyPart = "&difficulties=";
 
     const fixTopics = topics.map(topic=>topic.toLowerCase().replace(" ","_")).join(",");
     
     try{
       const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty);
+      console.log(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty)
       const result = (await fetchQuizResults).json();
       const resultJson = await result;
       dispatch(collectQuestionsActions.collect(resultJson));
@@ -75,7 +76,7 @@ export default function StartQuiz () {
                     <button
                       key={num}
                       onClick={() => {
-                        setTotalItems(num);
+                        setTotalItems(num as TotalItems);
                         next();
                       }}
                     >

@@ -62,11 +62,7 @@ export default function Results() {
                 Your Answer: <span>{item.playerAnswer}</span>
               </p>
 
-              {!item.isCorrectAnswer && (
-                <p className={styles.correctAnswer}>
-                  Correct Answer: <span>{item.correctAnswer}</span>
-                </p>
-              )}
+              
 
               <div className={styles.status}>
                 {item.isCorrectAnswer ? "✅ Correct" : "❌ Wrong"}
