@@ -38,7 +38,6 @@ export default function StartQuiz () {
     
     try{
       const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty);
-      console.log(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty)
       const result = (await fetchQuizResults).json();
       const resultJson = await result;
       dispatch(collectQuestionsActions.collect(resultJson));

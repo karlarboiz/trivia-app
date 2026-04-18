@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import type { QuizItemsModel } from "../../pages/QuizPageMC/quizpageMC-model";
+import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
+import { useAppDispatch } from "../../redux/hook";
 import styles from "./Results.module.css";
 
 export default function Results() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const results: QuizItemsModel[] = (() => {
     try {
@@ -19,6 +22,7 @@ export default function Results() {
 
   const handleRestart = () => {
     localStorage.removeItem("quizItems");
+    dispatch(collectQuestionsActions.resetCollection());
     navigate("/");
   };
 
