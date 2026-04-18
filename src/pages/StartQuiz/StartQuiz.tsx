@@ -1,12 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
 import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import CommonUtil from "../../Util/CommonUtil";
 import styles from "./StartQuiz.module.css";
-
 
 type Difficulty = "easy" | "medium" | "hard";
 type Timer = 5 | 10 | 15;
@@ -25,7 +26,7 @@ export default function StartQuiz () {
   const isInGame = quizItems.length > 0;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const next= () => setStep((prev) => prev + 1);
+  const next= (step : string) => step === "next" ? setStep((prev) => prev + 1) : setStep((prev) => prev - 1);
   const currentStep = steps[step];
 
   const handleSubmit = async(e: React.FormEvent) => {
@@ -48,117 +49,114 @@ export default function StartQuiz () {
 
   };
 
-  // const 
-
   return (
     <>
       <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer} isInGame={isInGame}/>
        <div className={styles.container}>
-      <h1 className={styles.title}>🎯 Swipe to Configure</h1>
+       {step > 0 &&  <Button title="" type={CommonUtil.ALTERNATE_BTN} onClick={(()=>next("prev"))} children={<FaArrowAltCircleLeft color="red" size="2em" />}/>}
+        <div className={styles.cardWrapper}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              className={styles.card}
+              initial={{ x: 300, opacity: 0, rotate: 10 }}
+              animate={{ x: 0, opacity: 1, rotate: 0 }}
+              exit={{ x: -300, opacity: 0, rotate: -10 }}
+              transition={{ duration: 0.4 }}
+            >
+              {/* STEP 1 */}
+              {currentStep === "items" && (
+                <>
+                  <h2>How many questions?</h2>
+                  <div className={styles.options}>
+                    {[5, 10, 15].map((num) => (
+                      <button
+                        key={num}
+                        onClick={() => {
+                          setTotalItems(num as TotalItems);
+                          next("next");
+                        }}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
 
-      <div className={styles.cardWrapper}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            className={styles.card}
-            initial={{ x: 300, opacity: 0, rotate: 10 }}
-            animate={{ x: 0, opacity: 1, rotate: 0 }}
-            exit={{ x: -300, opacity: 0, rotate: -10 }}
-            transition={{ duration: 0.4 }}
-          >
-            {/* STEP 1 */}
-            {currentStep === "items" && (
-              <>
-                <h2>How many questions?</h2>
-                <div className={styles.options}>
-                  {[5, 10, 15].map((num) => (
-                    <button
-                      key={num}
-                      onClick={() => {
-                        setTotalItems(num as TotalItems);
-                        next();
-                      }}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {/* STEP 2 */}
-            {currentStep === "topics" && (
-              <>
-                <h2>Pick topics</h2>
-                <div className={styles.options}>
-                  {CommonUtil.CATEGORY_TOPICS.map((topic) => (
-                    <button
-                      key={topic}
-                      className={
-                        topics.includes(topic) ? styles.active : ""
-                      }
-                      onClick={() => {
-                        if (topics.includes(topic)) {
-                          setTopics(topics.filter((t) => t !== topic));
-                        } else {
-                          setTopics([...topics, topic]);
+              {/* STEP 2 */}
+              {currentStep === "topics" && (
+                <>
+                  <h2>Pick topics</h2>
+                  <div className={styles.options}>
+                    {CommonUtil.CATEGORY_TOPICS.map((topic) => (
+                      <button
+                        key={topic}
+                        className={
+                          topics.includes(topic) ? styles.active : ""
                         }
-                      }}
-                    >
-                      {topic}
-                    </button>
-                  ))}
-                </div>
+                        onClick={() => {
+                          if (topics.includes(topic)) {
+                            setTopics(topics.filter((t) => t !== topic));
+                          } else {
+                            setTopics([...topics, topic]);
+                          }
+                        }}
+                      >
+                        {topic}
+                      </button>
+                    ))}
+                  </div>
 
-                <button className={styles.nextBtn} onClick={next}>
-                  Continue →
-                </button>
-              </>
-            )}
+                  <button className={styles.nextBtn} onClick={()=>next("next")}>
+                    Continue →
+                  </button>
+                </>
+              )}
 
-            {/* STEP 3 */}
-            {currentStep === "difficulty" && (
-              <>
-                <h2>Select difficulty</h2>
-                <div className={styles.options}>
-                  {["easy", "medium", "hard"].map((d) => (
-                    <button
-                      key={d}
-                      onClick={() => {
-                        setDifficulty(d as Difficulty);
-                        next();
-                      }}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
+              {/* STEP 3 */}
+              {currentStep === "difficulty" && (
+                <>
+                  <h2>Select difficulty</h2>
+                  <div className={styles.options}>
+                    {["easy", "medium", "hard"].map((d) => (
+                      <button
+                        key={d}
+                        onClick={() => {
+                          setDifficulty(d as Difficulty);
+                          next("next");
+                        }}
+                      >
+                        {d}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
 
-            {/* STEP 4 */}
-            {currentStep === "timer" && (
-              <>
-                <h2>Set timer</h2>
-                <div className={styles.options}>
-                  {[5, 10, 15].map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setTimer(Number(t) as Timer)}
-                    >
-                      {t}s
-                    </button>
-                  ))}
-                </div>
+              {/* STEP 4 */}
+              {currentStep === "timer" && (
+                <>
+                  <h2>Set timer</h2>
+                  <div className={styles.options}>
+                    {[5, 10, 15].map((t) => (
+                      <button
+                        key={t}
+                        onClick={() => setTimer(Number(t) as Timer)}
+                      >
+                        {t}s
+                      </button>
+                    ))}
+                  </div>
 
-                <button className={styles.startBtn} onClick={handleSubmit}>
-                  🚀 Start Quiz
-                </button>
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+                  <button className={styles.startBtn} onClick={handleSubmit}>
+                    🚀 Start Quiz
+                  </button>
+                </>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
     </div>
     </>
   );
