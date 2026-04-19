@@ -68,3 +68,6 @@ width: 150px;
   font-weight: 550;
 }
 
+.alternateBtn {
+  all: unset;
+}

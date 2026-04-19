@@ -14,37 +14,45 @@ export default function QuizSettings({
   );
 
   return (
-    <section className={styles.settingsContainer}>
+    <section className={styles.container}>
       
-      <div className={styles.setting}>
-        <span className={styles.label}>
-          {isInGame ? "Item No" : "Items"}
-        </span>
-        <span className={styles.value}>
-          {isInGame
-            ? `${itemNumber + 1} / ${totalItems}`
-            : totalItems}
-        </span>
+      {/* LEFT: Topics */}
+      <div className={styles.leftColumn}>
+        <h3 className={styles.sectionTitle}>Topics</h3>
+        <ul className={styles.topicList}>
+          {topics.map((topic, index) => (
+            <li key={index} className={styles.topicItem}>
+              {topic}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <div className={styles.setting}>
-        <span className={styles.label}>Topics</span>
-        <span className={styles.value}>
-          {topics.join(", ")}
-        </span>
-      </div>
-
-      <div className={styles.setting}>
-        <span className={styles.label}>Difficulty</span>
-        <span className={styles.value}>{difficulty}</span>
-      </div>
-
-      {!isInGame && (
-        <div className={styles.setting}>
-          <span className={styles.label}>Timer</span>
-          <span className={styles.value}>{timer} secs</span>
+      {/* RIGHT: Config */}
+      <div className={styles.rightColumn}>
+        <div className={styles.configItem}>
+          <span className={styles.label}>
+            {isInGame ? "Item No" : "Items"}
+          </span>
+          <span className={styles.value}>
+            {isInGame
+              ? `${itemNumber + 1} / ${totalItems}`
+              : totalItems}
+          </span>
         </div>
-      )}
+
+        <div className={styles.configItem}>
+          <span className={styles.label}>Difficulty</span>
+          <span className={styles.value}>{difficulty}</span>
+        </div>
+
+        {!isInGame && (
+          <div className={styles.configItem}>
+            <span className={styles.label}>Timer</span>
+            <span className={styles.value}>{timer} secs</span>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

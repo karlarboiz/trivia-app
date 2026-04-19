@@ -1,61 +1,93 @@
-.settingsContainer {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  padding: 12px;
-  flex-wrap: wrap;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
- 
+  gap: 24px;
+  padding: 16px;
+  align-items: start;
+  max-width: 60rem;
+  margin: 0 auto;
 }
 
-/* Each card */
-.setting {
-  background: white;
-  border-radius: 12px;
-  padding: 10px 14px;
-  min-width: 200px;
-
+/* LEFT COLUMN */
+.leftColumn {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
+}
 
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+.topicList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topicItem {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #444;
+  border: 1px solid #ddd;
   transition: 0.2s ease;
 }
 
-.setting:hover {
-  transform: translateY(-2px);
+.topicItem:hover {
+  border-color: #555;
 }
 
-/* Label */
+/* RIGHT COLUMN */
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* CONFIG ITEMS */
+.configItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
+
+/* TEXT STYLES */
 .label {
-  font-size: 1.25rem;
-  color: #888;
+  font-size: 0.75rem;
   text-transform: uppercase;
+  color: #888;
+  font-weight: 600;
   letter-spacing: 0.5px;
-  font-weight: 700;
 }
 
-/* Value */
 .value {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #111;
 }
 
-/* Optional: highlight important one */
-.setting:first-child {
-  background: #eff6ff;
-  border: 1px solid #3b82f6;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .settingsContainer {
-    justify-content: center;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .setting {
-    flex: 1 1 45%;
+  .rightColumn {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
   }
 }

@@ -23,7 +23,7 @@ export default function Results() {
   const handleRestart = () => {
     localStorage.removeItem("quizItems");
     dispatch(collectQuestionsActions.resetCollection());
-    navigate("/");
+    navigate("/start-quiz");
   };
 
   return (

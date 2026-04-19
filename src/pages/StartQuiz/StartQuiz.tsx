@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Loading from "../../components/Loading/Loading";
@@ -31,7 +31,7 @@ export default function StartQuiz () {
   const next= (step : string) => {
     setTimeout(()=>{
       step === "next" ? setStep((prev) => prev + 1) : setStep((prev) => prev - 1)
-    },500)
+    },100)
   };
   const currentStep = steps[step];
 
@@ -61,118 +61,120 @@ export default function StartQuiz () {
   return (
     <>
       <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer} isInGame={isInGame}/>
-      {isFetch && <Loading/>}
-       <div className={styles.container}>
-       {step > 0 &&  <Button title="" type={CommonUtil.ALTERNATE_BTN} onClick={(()=>next("prev"))} children={<FaArrowAltCircleLeft color="red" size="2em" />}/>}
-        <div className={styles.cardWrapper}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              className={styles.card}
-              initial={{ x: 300, opacity: 0, rotate: 10 }}
-              animate={{ x: 0, opacity: 1, rotate: 0 }}
-              exit={{ x: -300, opacity: 0, rotate: -10 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* STEP 1 */}
-              {currentStep === "items" && (
-                <>
-                  <h2>How many questions?</h2>
-                  <div className={styles.options}>
-                    {[5, 10, 15].map((num) => (
-                      <button
-                      className={num === totalItems ? styles.active : ""}
-                        key={num}
-                        onClick={() => {
-                          setTotalItems(num as TotalItems);
-                          next("next");
-                        }}
-                      >
-                        {num}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+        {isFetch && <Loading/>}
+        {!isFetch && <div className={styles.container}>
+        
+          <div className={styles.cardWrapper}>
+            
+            <AnimatePresence mode="wait">
+              {step > 0 &&  <Button title="" type={CommonUtil.ALTERNATE_BTN} onClick={(()=>next("prev"))} children={<FaArrowLeft color="black" size="1.5em"/>}/>}
+              <motion.div
+                key={currentStep}
+                className={styles.card}
+                initial={{ x: 300, opacity: 0, rotate: 10 }}
+                animate={{ x: 0, opacity: 1, rotate: 0 }}
+                exit={{ x: -300, opacity: 0, rotate: -10 }}
+                transition={{ duration: 0.4 }}
+              >
+                {/* STEP 1 */}
+                {currentStep === "items" && (
+                  <>
+                    <h1>How many questions?</h1>
+                    <div className={styles.options}>
+                      {[5, 10, 15].map((num) => (
+                        <button
+                        className={num === totalItems ? styles.active : ""}
+                          key={num}
+                          onClick={() => {
+                            setTotalItems(num as TotalItems);
+                            next("next");
+                          }}
+                        >
+                          {num}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
 
-              {/* STEP 2 */}
-              {currentStep === "topics" && (
-                <>
-                  <h2>Pick topics</h2>
-                  <div className={styles.options}>
-                    {CommonUtil.CATEGORY_TOPICS.map((topic) => (
-                      <button
-                        key={topic}
-                        className={
-                          topics.includes(topic) ? styles.active : ""
-                        }
-                        onClick={() => {
-                          if (topics.includes(topic)) {
-                            setTopics(topics.filter((t) => t !== topic));
-                          } else {
-                            setTopics([...topics, topic]);
+                {/* STEP 2 */}
+                {currentStep === "topics" && (
+                  <>
+                    <h2>Pick topics</h2>
+                    <div className={styles.options}>
+                      {CommonUtil.CATEGORY_TOPICS.map((topic) => (
+                        <button
+                          key={topic}
+                          className={
+                            topics.includes(topic) ? styles.active : ""
                           }
-                        }}
-                      >
-                        {topic}
-                      </button>
-                    ))}
-                  </div>
+                          onClick={() => {
+                            if (topics.includes(topic)) {
+                              setTopics(topics.filter((t) => t !== topic));
+                            } else {
+                              setTopics([...topics, topic]);
+                            }
+                          }}
+                        >
+                          {topic}
+                        </button>
+                      ))}
+                    </div>
 
-                  <button className={styles.nextBtn} onClick={()=>next("next")}>
-                    Continue →
-                  </button>
-                </>
-              )}
+                    <button className={styles.nextBtn} onClick={()=>next("next")}>
+                      Continue →
+                    </button>
+                  </>
+                )}
 
-              {/* STEP 3 */}
-              {currentStep === "difficulty" && (
-                <>
-                  <h2>Select difficulty</h2>
-                  <div className={styles.options}>
-                    {["easy", "medium", "hard"].map((d) => (
-                      <button
-                       className={d === difficulty ? styles.active : ""}
-                        key={d}
-                        onClick={() => {
-                          setDifficulty(d as Difficulty);
-                          next("next");
-                        }}
-                      >
-                        {d}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+                {/* STEP 3 */}
+                {currentStep === "difficulty" && (
+                  <>
+                    <h2>Select difficulty</h2>
+                    <div className={styles.options}>
+                      {["easy", "medium", "hard"].map((d) => (
+                        <button
+                        className={d === difficulty ? styles.active : ""}
+                          key={d}
+                          onClick={() => {
+                            setDifficulty(d as Difficulty);
+                            next("next");
+                          }}
+                        >
+                          {d}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
 
-              {/* STEP 4 */}
-              {currentStep === "timer" && (
-                <>
-                  <h2>Set timer</h2>
-                  <div className={styles.options}>
-                    {[5, 10, 15].map((t) => (
-                      <button
-                        className={
-                          t === timer ? styles.active : ""
-                        }
-                        key={t}
-                        onClick={() => setTimer(Number(t) as Timer)}
-                      >
-                        {t}s
-                      </button>
-                    ))}
-                  </div>
+                {/* STEP 4 */}
+                {currentStep === "timer" && (
+                  <>
+                    <h2>Set timer</h2>
+                    <div className={styles.options}>
+                      {[5, 10, 15].map((t) => (
+                        <button
+                          className={
+                            t === timer ? styles.active : ""
+                          }
+                          key={t}
+                          onClick={() => setTimer(Number(t) as Timer)}
+                        >
+                          {t}s
+                        </button>
+                      ))}
+                    </div>
 
-                  <button className={styles.startBtn} onClick={handleSubmit}>
-                    🚀 Start Quiz
-                  </button>
-                </>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-    </div>
+                    <button className={styles.startBtn} onClick={handleSubmit}>
+                      🚀 Start Quiz
+                    </button>
+                  </>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+      </div>}
     </>
   );
 };
