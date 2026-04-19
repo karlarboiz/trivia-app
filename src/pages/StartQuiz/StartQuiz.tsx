@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import CommonUtil from "../../Util/CommonUtil";
 import styles from "./StartQuiz.module.css";
 
-type Difficulty = "easy" | "medium" | "hard";
+type Difficulty = "Easy" | "Medium" | "Hard";
 type Timer = 5 | 10 | 15;
 type TotalItems = 5 | 10 | 15 |20;
 const steps = ["items", "topics", "difficulty", "timer"];
@@ -20,7 +20,7 @@ export default function StartQuiz () {
   const [step, setStep] = useState(0);
   const [totalItems, setTotalItems] = useState<number>(10);
   const [topics, setTopics] = useState<string[]>([]);
-  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [difficulty, setDifficulty] = useState<Difficulty>("Easy");
   const [timer, setTimer] = useState<Timer>(5);
   const [isFetch, setIsFetch] = useState(false);
   const quizItems = useAppSelector(state => state.collectQuestionsSlice.value);
@@ -45,7 +45,7 @@ export default function StartQuiz () {
     const fixTopics = topics.map(topic=>topic.toLowerCase().replace(" ","_")).join(",");
     
     try{
-      const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty);
+      const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty.toLowerCase());
       const result = (await fetchQuizResults).json();
       const resultJson = await result;
       dispatch(collectQuestionsActions.collect(resultJson));
@@ -132,7 +132,7 @@ export default function StartQuiz () {
                   <>
                     <h2>Select difficulty</h2>
                     <div className={styles.options}>
-                      {["easy", "medium", "hard"].map((d) => (
+                      {CommonUtil.DIFFICULTY_CHOICES.map((d) => (
                         <button
                         className={d === difficulty ? styles.active : ""}
                           key={d}

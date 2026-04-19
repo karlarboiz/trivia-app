@@ -11,6 +11,11 @@ class CommonUtil {
       "Sports",
       "Entertainment",
     ];
+    static DIFFICULTY_CHOICES: string[]=[
+      "Easy",
+      "Medium",
+      "Hard"
+    ]
 }
 
 export default CommonUtil;
