@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
+import Loading from "../../components/Loading/Loading";
 import QuizSettings from "../../components/QuizSettings/QuizSettings";
 import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
@@ -21,16 +22,22 @@ export default function StartQuiz () {
   const [topics, setTopics] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [timer, setTimer] = useState<Timer>(5);
-
+  const [isFetch, setIsFetch] = useState(false);
   const quizItems = useAppSelector(state => state.collectQuestionsSlice.value);
   const isInGame = quizItems.length > 0;
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const next= (step : string) => step === "next" ? setStep((prev) => prev + 1) : setStep((prev) => prev - 1);
+  const next= (step : string) => {
+    setTimeout(()=>{
+      step === "next" ? setStep((prev) => prev + 1) : setStep((prev) => prev - 1)
+    },500)
+  };
   const currentStep = steps[step];
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
+    setIsFetch(true);
     const baseUrl = "https://the-trivia-api.com/api/questions?limit=";
     const topicPart = "&categories=";
     const difficultyPart = "&difficulties=";
@@ -47,11 +54,14 @@ export default function StartQuiz () {
 
     }
 
+    setIsFetch(false);
+
   };
 
   return (
     <>
       <QuizSettings totalItems={totalItems} topics={topics} difficulty={difficulty} timer={timer} isInGame={isInGame}/>
+      {isFetch && <Loading/>}
        <div className={styles.container}>
        {step > 0 &&  <Button title="" type={CommonUtil.ALTERNATE_BTN} onClick={(()=>next("prev"))} children={<FaArrowAltCircleLeft color="red" size="2em" />}/>}
         <div className={styles.cardWrapper}>
@@ -71,6 +81,7 @@ export default function StartQuiz () {
                   <div className={styles.options}>
                     {[5, 10, 15].map((num) => (
                       <button
+                      className={num === totalItems ? styles.active : ""}
                         key={num}
                         onClick={() => {
                           setTotalItems(num as TotalItems);
@@ -121,6 +132,7 @@ export default function StartQuiz () {
                   <div className={styles.options}>
                     {["easy", "medium", "hard"].map((d) => (
                       <button
+                       className={d === difficulty ? styles.active : ""}
                         key={d}
                         onClick={() => {
                           setDifficulty(d as Difficulty);
@@ -141,6 +153,9 @@ export default function StartQuiz () {
                   <div className={styles.options}>
                     {[5, 10, 15].map((t) => (
                       <button
+                        className={
+                          t === timer ? styles.active : ""
+                        }
                         key={t}
                         onClick={() => setTimer(Number(t) as Timer)}
                       >
