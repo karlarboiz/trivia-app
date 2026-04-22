@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs-react";
 import { useState } from "react";
 import type { QuizItemsModel } from "../../pages/QuizPageMC/quizpageMC-model";
+import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choice-redux";
 import QuizSettings from "../QuizSettings/QuizSettings";
@@ -22,6 +23,11 @@ export default function QuizItemsMC({ incrementValue, quizItems, isInGame,onClic
       isCorrectAnswer
     }));
     onClickedMonitoring();
+
+    if(!isInGame){
+      localStorage.removeItem("quizItems");
+      dispatch(collectQuestionsActions.resetCollection());
+    }
     
   };
   if (!currentQuizItem) {

@@ -1,7 +1,10 @@
+import { FaArrowRotateLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import type { QuizItemsModel } from "../../pages/QuizPageMC/quizpageMC-model";
 import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
 import { useAppDispatch } from "../../redux/hook";
+import CommonUtil from "../../Util/CommonUtil";
+import Button from "../Button/Button";
 import styles from "./Results.module.css";
 
 export default function Results() {
@@ -28,16 +31,11 @@ export default function Results() {
 
   return (
     <div className={styles.layout}>
-      
-      {/* LEFT SIDE */}
-      <div className={styles.sidebar}>
-        <button className={styles.restartBtn} onClick={handleRestart}>
-          Restart Quiz
-        </button>
-      </div>
-
-      {/* RIGHT SIDE */}
       <div className={styles.container}>
+        <Button title="" type={CommonUtil.ALTERNATE_BTN} additionalClass={""} onClick={handleRestart}>
+          <FaArrowRotateLeft></FaArrowRotateLeft>
+        </Button>
+
         <div className={styles.header}>
           <h1 className={styles.title}>Quiz Results</h1>
           <p className={styles.subtitle}>Here's how you performed 🎯</p>
@@ -65,9 +63,6 @@ export default function Results() {
               <p className={styles.answer}>
                 Your Answer: <span>{item.playerAnswer}</span>
               </p>
-
-              
-
               <div className={styles.status}>
                 {item.isCorrectAnswer ? "✅ Correct" : "❌ Wrong"}
               </div>

@@ -1,4 +1,4 @@
-/* LAYOUT */
+LAYOUT
 .layout {
   display: flex;
   gap: 20px;
@@ -31,10 +31,6 @@
   background-color: #2563eb;
 }
 
-/* RIGHT SIDE */
-.container {
-  flex: 1;
-}
 
 /* HEADER */
 .header {
@@ -70,9 +66,9 @@
 
 /* LIST */
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .card {

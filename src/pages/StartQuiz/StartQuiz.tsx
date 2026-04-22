@@ -100,7 +100,7 @@ export default function StartQuiz () {
                 {/* STEP 2 */}
                 {currentStep === "topics" && (
                   <>
-                    <h2>Pick topics</h2>
+                    <h1>Pick topics</h1>
                     <div className={styles.options}>
                       {CommonUtil.CATEGORY_TOPICS.map((topic) => (
                         <button
@@ -130,7 +130,7 @@ export default function StartQuiz () {
                 {/* STEP 3 */}
                 {currentStep === "difficulty" && (
                   <>
-                    <h2>Select difficulty</h2>
+                    <h1>Select difficulty</h1>
                     <div className={styles.options}>
                       {CommonUtil.DIFFICULTY_CHOICES.map((d) => (
                         <button
@@ -151,7 +151,7 @@ export default function StartQuiz () {
                 {/* STEP 4 */}
                 {currentStep === "timer" && (
                   <>
-                    <h2>Set timer</h2>
+                    <h1>Set timer</h1>
                     <div className={styles.options}>
                       {[5, 10, 15].map((t) => (
                         <button
