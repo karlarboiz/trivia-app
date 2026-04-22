@@ -67,7 +67,7 @@ export default function StartQuiz () {
           <div className={styles.cardWrapper}>
             
             <AnimatePresence mode="wait">
-              {step > 0 &&  <Button title="" type={CommonUtil.ALTERNATE_BTN} onClick={(()=>next("prev"))} children={<FaArrowLeft color="black" size="1.5em"/>}/>}
+              {step > 0 &&  <Button additionalClass="" title="" type={CommonUtil.ALTERNATE_BTN} onClick={(()=>next("prev"))} children={<FaArrowLeft color="black" size="1.5em"/>}/>}
               <motion.div
                 key={currentStep}
                 className={styles.card}
