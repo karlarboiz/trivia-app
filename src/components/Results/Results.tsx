@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import type { QuizItemsModel } from "../../pages/QuizPageMC/quizpageMC-model";
 import { collectQuestionsActions } from "../../redux/collect-questions/collect-questions";
 import { useAppDispatch } from "../../redux/hook";
+
+import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choice-redux";
 import CommonUtil from "../../Util/CommonUtil";
 import Button from "../Button/Button";
 import styles from "./Results.module.css";
@@ -24,8 +26,8 @@ export default function Results() {
   const percentage = total ? Math.round((correctCount / total) * 100) : 0;
 
   const handleRestart = () => {
-    localStorage.removeItem("quizItems");
     dispatch(collectQuestionsActions.resetCollection());
+    dispatch(multipleChoiceActions.reset());
     navigate("/start-quiz");
   };
 
