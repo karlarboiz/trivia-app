@@ -30,9 +30,6 @@ export default function QuizItemsMC({ incrementValue, quizItems, isInGame,onClic
     }
     
   };
-  if (!currentQuizItem) {
-    return <div>Loading question...</div>;
-  }
 
   return (
     <>
