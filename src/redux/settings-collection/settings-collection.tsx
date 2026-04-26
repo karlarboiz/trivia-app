@@ -13,7 +13,7 @@ const settingsCollectionSlice = createSlice({
       state.items = action.payload.items;
       state.topics = action.payload.topics;
       state.difficulty=  action.payload.difficulty;
-      state.difficulty = action.payload.timer
+      state.timer = action.payload.timer
     }
   }
 })

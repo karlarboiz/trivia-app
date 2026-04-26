@@ -8,7 +8,11 @@ import QuizSettings from "../QuizSettings/QuizSettings";
 import type { QuizItemsMCModel } from "./quizitemsMC-model";
 import styles from "./QuizItemsMC.module.css";
 
-export default function QuizItemsMC({ incrementValue, quizItems, isInGame,onClickedMonitoring }: QuizItemsMCModel) {
+export default function QuizItemsMC({
+  incrementValue,
+  quizItems,
+  isInGame,
+}: QuizItemsMCModel) {
   const [selected, setSelected] = useState<string | null>(null);
   const currentQuizItem: QuizItemsModel | undefined = quizItems[incrementValue];
   const dispatch = useAppDispatch();
@@ -22,7 +26,6 @@ export default function QuizItemsMC({ incrementValue, quizItems, isInGame,onClic
     dispatch(multipleChoiceActions.checkAnswer({answer,
       isCorrectAnswer
     }));
-    onClickedMonitoring();
 
     if(!isInGame){
       localStorage.removeItem("quizItems");

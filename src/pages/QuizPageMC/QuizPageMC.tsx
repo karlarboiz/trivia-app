@@ -14,31 +14,29 @@ export default function QuizPageMC() {
   const itemNumber: number = useAppSelector(
     state => state.multipleChoiceSlice.value
   );
+  const settings = useAppSelector(state => state.settingsCollectionSlice);
 
-   const isInGame = itemNumber <= quizItems.length - 1;
+  const isInGame = itemNumber <= quizItems.length - 1;
 
   const moveItem = () => {
-    
     if (isInGame) {
       dispatch(multipleChoiceActions.incremented());
-      return;
     }
   };
-
-  const clickedMonitoring =()=>{
-    console.log('im clicked');
-  }
-
 
   if (quizItems.length === 0) return <div>Loading quiz...</div>;
 
   return (
     <section className={styles.quizContainer}>
-      {isInGame? (
-        <>
-        <Timer key={itemNumber} duration={5} onTimeUp={moveItem} />
-        <QuizItemsMC incrementValue={itemNumber} quizItems={quizItems} isInGame={isInGame} onClickedMonitoring={clickedMonitoring}/>
-        </>
+      {isInGame ? (
+        <div key={itemNumber} className={styles.questionTransition}>
+          <Timer key={itemNumber} duration={settings.timer} onTimeUp={moveItem} />
+          <QuizItemsMC
+            incrementValue={itemNumber}
+            quizItems={quizItems}
+            isInGame={isInGame}
+          />
+        </div>
       ) : (
         <Results />
       )}

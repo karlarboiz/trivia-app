@@ -1,21 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { TimerProps } from "./timer-model";
 import styles from "./Timer.module.css";
 
 export default function Timer({ duration, onTimeUp }: TimerProps) {
   const [timeLeft, setTimeLeft] = useState(duration * 1000);
+  const onTimeUpRef = useRef(onTimeUp);
+  const hasCompletedRef = useRef(false);
+
   useEffect(() => {
-    if (timeLeft <= 0) {
-      onTimeUp(); 
-      return;
-    }
+    onTimeUpRef.current = onTimeUp;
+  }, [onTimeUp]);
+
+  useEffect(() => {
+    setTimeLeft(duration * 1000);
+    hasCompletedRef.current = false;
+  }, [duration]);
+
+  useEffect(() => {
+    if (timeLeft <= 0 || hasCompletedRef.current) return;
 
     const interval = setInterval(() => {
-      setTimeLeft(prev => prev - 100);
+      setTimeLeft(prev => {
+        const next = Math.max(prev - 100, 0);
+
+        if (next === 0 && !hasCompletedRef.current) {
+          hasCompletedRef.current = true;
+          onTimeUpRef.current();
+        }
+
+        return next;
+      });
     }, 100);
 
     return () => clearInterval(interval);
-  }, [timeLeft, onTimeUp]);
+  }, [timeLeft]);
 
   const seconds = Math.floor(timeLeft / 1000);
   const milliseconds = Math.floor((timeLeft % 1000) / 10);

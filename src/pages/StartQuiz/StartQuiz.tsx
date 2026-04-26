@@ -9,6 +9,7 @@ import { collectQuestionsActions } from "../../redux/collect-questions/collect-q
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import CommonUtil from "../../Util/CommonUtil";
 import styles from "./StartQuiz.module.css";
+import { settingsCollectionActions } from "../../redux/settings-collection/settings-collection";
 
 type Difficulty = "Easy" | "Medium" | "Hard";
 type Timer = 5 | 10 | 15;
@@ -52,6 +53,7 @@ export default function StartQuiz () {
       const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty.toLowerCase());
       const resultJson = await fetchQuizResults.json();
       dispatch(collectQuestionsActions.collect(resultJson));
+      dispatch(settingsCollectionActions.collectSettings({items: totalItems, topics: topics, difficulty: difficulty, timer: timer}));
       navigate("/quiz-page/multiple-choice")
     }catch(error){
       console.error("Unable to fetch quiz data", error);
