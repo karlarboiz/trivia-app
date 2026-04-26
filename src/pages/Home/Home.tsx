@@ -11,11 +11,11 @@ export default function Home(){
 
     return (
         <div className={styles.container}>
-      {/* HERO SECTION */}
       <section className={styles.hero}>
+        <p className={styles.badge}>Interactive learning made fun</p>
         <h1 className={styles.title}>Test Your Knowledge 🚀</h1>
         <p className={styles.subtitle}>
-          Take exciting trivia quizzes, challenge yourself, and climb the leaderboard.
+          Take fast, exciting trivia quizzes, challenge yourself, and improve every round.
         </p>
 
         <div className={styles.buttons}>
@@ -26,21 +26,20 @@ export default function Home(){
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
       <section className={styles.features}>
         <div className={styles.card}>
           <h3>🎯 Multiple Categories</h3>
-          <p>Choose from various topics and difficulty levels.</p>
+          <p>Pick topics and difficulty that match your pace.</p>
         </div>
 
         <div className={styles.card}>
           <h3>🏆 Track Your Score</h3>
-          <p>Monitor your progress and improve over time.</p>
+          <p>See your progress and push for higher scores.</p>
         </div>
 
         <div className={styles.card}>
           <h3>⚡ Fast & Responsive</h3>
-          <p>Enjoy smooth performance across all devices.</p>
+          <p>Enjoy smooth gameplay across desktop and mobile.</p>
         </div>
       </section>
     </div>

@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className={styles["logo"]}><Link to="/" className={styles["link"]}>Trivia</Link></div>
       <ul className={styles["navLinks"]}>
         <li><Link to="/about" className={styles["link"]}>About</Link></li>
-        <li><Link to="/contact" className={styles["link"]}>Contact</Link></li>
+        <li><Link to="/start-quiz" className={styles["link"]}>Start Quiz</Link></li>
       </ul>
     </nav>
   );

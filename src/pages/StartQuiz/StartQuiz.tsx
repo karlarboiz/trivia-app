@@ -30,7 +30,11 @@ export default function StartQuiz () {
   const dispatch = useAppDispatch();
   const next= (step : string) => {
     setTimeout(()=>{
-      step === "next" ? setStep((prev) => prev + 1) : setStep((prev) => prev - 1)
+      if (step === "next") {
+        setStep((prev) => prev + 1);
+      } else {
+        setStep((prev) => prev - 1);
+      }
     },100)
   };
   const currentStep = steps[step];
@@ -46,12 +50,11 @@ export default function StartQuiz () {
     
     try{
       const fetchQuizResults = await fetch(baseUrl+totalItems+topicPart+fixTopics+difficultyPart+difficulty.toLowerCase());
-      const result = (await fetchQuizResults).json();
-      const resultJson = await result;
+      const resultJson = await fetchQuizResults.json();
       dispatch(collectQuestionsActions.collect(resultJson));
       navigate("/quiz-page/multiple-choice")
     }catch(error){
-
+      console.error("Unable to fetch quiz data", error);
     }
 
     setIsFetch(false);

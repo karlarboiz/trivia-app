@@ -1,9 +1,8 @@
-/* From Uiverse.io by alexmaracinaru */ 
 .cta {
   position: relative;
-  margin: auto;
-  padding: 12px 18px;
-  transition: all 0.2s ease;
+  margin: 0;
+  padding: 0.85rem 1.2rem;
+  transition: transform 0.2s ease;
   border: none;
   background: none;
   cursor: pointer;
@@ -15,8 +14,8 @@
   top: 0;
   left: 0;
   display: block;
-  border-radius: 50px;
-  background: #b1dae7;
+  border-radius: 999px;
+  background: rgba(65, 166, 126, 0.2);
   width: 45px;
   height: 45px;
   transition: all 0.3s ease;
@@ -24,10 +23,10 @@
 
 .cta span {
   position: relative;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #234567;
+  letter-spacing: 0.02em;
+  color: var(--secondary);
 }
 
 .cta svg {
@@ -37,7 +36,7 @@
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke: #234567;
+  stroke: var(--secondary);
   stroke-width: 2;
   transform: translateX(-5px);
   transition: all 0.3s ease;
@@ -45,7 +44,7 @@
 
 .cta:hover:before {
   width: 100%;
-  background: #b1dae7;
+  background: rgba(65, 166, 126, 0.28);
 }
 
 .cta:hover svg {
@@ -57,17 +56,25 @@
 }
 
 .secondaryBtn {
-width: 150px;
-  height: 60px;
-  border: 3px solid #315cfd;
-  border-radius: 45px;
-  transition: all 0.3s;
+  min-width: 150px;
+  height: 52px;
+  border: 2px solid var(--accent-blue);
+  border-radius: 999px;
+  transition: all 0.3s ease;
   cursor: pointer;
-  background: white;
-  font-size: 1.2em;
-  font-weight: 550;
+  background: var(--surface);
+  color: var(--secondary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.secondaryBtn:hover {
+  background: var(--secondary);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .alternateBtn {
   all: unset;
+  cursor: pointer;
 }

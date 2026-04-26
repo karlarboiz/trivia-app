@@ -1,30 +1,47 @@
 :root {
-  --common-link-size: 18px;
+  --common-link-size: 1rem;
 }
 
 .container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
-/* HERO SECTION */
 .hero {
   text-align: center;
-  padding: 100px 20px;
+  background: linear-gradient(145deg, rgba(65, 166, 126, 0.1), rgba(16, 85, 201, 0.08));
+  border: 1px solid rgba(16, 85, 201, 0.12);
+  border-radius: 24px;
+  padding: clamp(2rem, 6vw, 5rem) 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(229, 201, 95, 0.24);
+  color: var(--secondary);
+  border: 1px solid rgba(229, 201, 95, 0.8);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
 }
 
 .title {
-  font-size: 3rem;
-  margin-bottom: 15px;
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin: 0 0 0.9rem;
   font-family: "Press Start 2P", system-ui;
-  color: #41A67E;
+  color: var(--secondary);
+  line-height: 1.35;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  opacity: 0.9;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  margin: 0 auto 1.75rem;
+  color: var(--text-muted);
+  max-width: 650px;
 }
 
 .buttons {
@@ -36,74 +53,57 @@
 }
 
 .primaryBtn {
-  background-color: white;
-  color: #4f46e5;
-  padding: 12px 24px;
-  border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s ease;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(16, 85, 201, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(5, 51, 156, 0.12);
 }
 
 .primaryBtn:hover {
-  background-color: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px rgba(5, 51, 156, 0.18);
 }
 
-.secondaryBtn {
-  border: 2px solid white;
-  font-size: var(--common-link-size);
-  padding: 12px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: 0.3s ease;
-}
-
-.secondaryBtn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* FEATURES */
 .features {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 60px 20px;
-  flex-wrap: wrap;
-  background-color: #f9fafb;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 0.75rem;
 }
 
 .card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 260px;
+  background: #fff;
+  padding: 1.3rem;
+  border-radius: 18px;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: 0.3s ease;
+  border: 1px solid rgba(16, 85, 201, 0.1);
+  box-shadow: 0 8px 24px rgba(5, 51, 156, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card h3 {
+  margin: 0 0 0.75rem;
+  color: var(--secondary);
+}
+
+.card p {
+  margin: 0;
+  color: var(--text-muted);
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 24px rgba(5, 51, 156, 0.14);
 }
 
-/* FOOTER */
-.footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 20px;
-  background-color: #111827;
-  color: white;
-  font-size: 0.9rem;
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .title {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .features {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 }

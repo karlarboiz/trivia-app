@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import QuizItemsMC from "../../components/QuizItemsMC/QuizItemsMC";
 import Results from "../../components/Results/Results";
 import Timer from "../../components/Timer/Timer";
@@ -7,18 +7,13 @@ import { multipleChoiceActions } from "../../redux/multiple-choice/multiple-choi
 import type { QuizItemsModel } from "./quizpageMC-model";
 import styles from "./QuizPageMC.module.css";
 export default function QuizPageMC() {
-  const [quizItems, setQuizItems] = useState<QuizItemsModel[]>([]);
+  const [quizItems] = useState<QuizItemsModel[]>(() =>
+    JSON.parse(localStorage.getItem("quizItems") || "[]")
+  );
   const dispatch = useAppDispatch();
   const itemNumber: number = useAppSelector(
     state => state.multipleChoiceSlice.value
   );
-
-  useEffect(() => {
-    const data: QuizItemsModel[] = JSON.parse(
-      localStorage.getItem("quizItems") || "[]"
-    );
-    setQuizItems(data);
-  }, []);
 
    const isInGame = itemNumber <= quizItems.length - 1;
 

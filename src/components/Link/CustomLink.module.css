@@ -1,10 +1,11 @@
 .link-modern {
   position: relative;
   text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
+  color: var(--secondary);
+  font-weight: 600;
   transition: color 0.3s ease;
-  font-size: 18px;
+  font-size: 1rem;
+  padding-bottom: 2px;
 }
 
 .link-modern::after {
@@ -14,12 +15,12 @@
   height: 2px;
   left: 0;
   bottom: -4px;
-  background-color: #3498db;
+  background-color: var(--accent-blue);
   transition: width 0.3s ease;
 }
 
 .link-modern:hover {
-  color: #3498db;
+  color: var(--accent-blue);
 }
 
 .link-modern:hover::after {

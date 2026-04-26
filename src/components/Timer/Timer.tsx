@@ -15,7 +15,7 @@ export default function Timer({ duration, onTimeUp }: TimerProps) {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [timeLeft]);
+  }, [timeLeft, onTimeUp]);
 
   const seconds = Math.floor(timeLeft / 1000);
   const milliseconds = Math.floor((timeLeft % 1000) / 10);
